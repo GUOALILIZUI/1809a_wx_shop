@@ -176,10 +176,11 @@ class WeiXinPayController extends Controller
             }else{       //签名验证成功
                 //TODO 逻辑处理  订单状态更新
                 $order_sn=$xml->out_trade_no;
-                $order_id=OrderModel::where('order_sn',$order_sn)->first('order_id');
+                $orderInfo=OrderModel::where('order_sn',$order_sn)->first();
+                $orderId=$orderInfo->order_id;
 
                 OrderModel::where('order_sn',$order_sn)->update(['order_status'=>2]);
-                OrderDetailModel::where('order_id',$order_id)->update(['detail_status'=>2]);
+                OrderDetailModel::where('order_id',$orderId)->update(['detail_status'=>2]);
 
             }
         }

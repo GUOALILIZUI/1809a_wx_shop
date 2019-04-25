@@ -14,7 +14,7 @@ class OrderController extends Controller
 {
     //生成订单
     public function order(){
-      $cartInfo=CartModel::where(['uid'=>Auth::id(),'session_id'=>Session::getId()])->get()->toarray();
+        $cartInfo=CartModel::where(['uid'=>Auth::id(),'session_id'=>Session::getId()])->get()->toarray();
       //print_r($cartInfo);exit;
       //计算总金额
         $total=0;
@@ -49,7 +49,9 @@ class OrderController extends Controller
 
     //列表展示
     public function orderList(){
-       $orderList=OrderModel::where(['uid'=>Auth::id()])->get()->toArray();
+
+
+        $orderList=OrderModel::where(['uid'=>Auth::id()])->get()->toArray();
         return view('order.list',['orderList'=>$orderList]);
     }
 }

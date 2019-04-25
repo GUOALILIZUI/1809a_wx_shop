@@ -86,7 +86,7 @@
                 <ul>
                     @foreach($orderList as $k=>$v)
                         <li>
-                            {{$v['oder_id']}}&nbsp;&nbsp; -- &nbsp;&nbsp;{{$v['order_sn']}}&nbsp;&nbsp; -- &nbsp;&nbsp;{{$v['total_price']}}
+                            {{$v['order_id']}}&nbsp;&nbsp; -- &nbsp;&nbsp;{{$v['order_sn']}}&nbsp;&nbsp; -- &nbsp;&nbsp;{{$v['total_price']}}
                             <a href="pay?order_sn={{$v['order_sn']}}" value="立即支付" >立即支付</a>
                         </li>
                     @endforeach
