@@ -5,12 +5,14 @@ namespace App\Http\Controllers\WeiXin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
+use App\Model\OrderModel;
+use App\Model\OrderDetailModel;
 
 class WeiXinPayController extends Controller
 {
     /**消息拼接*/
     public $placeUrl="https://api.mch.weixin.qq.com/pay/unifiedorder";  // 统一下单接口
-    public $backUrl="http://host.1809a_weixin_shop.com/payBack";  // 支付回调
+    public $backUrl="http://1809guomingyang.comcto.com/payBack";  // 支付回调
 
     /**微信支付测试*/
     public function pay(){
@@ -173,6 +175,10 @@ class WeiXinPayController extends Controller
                 // TODO 记录日志
             }else{       //签名验证成功
                 //TODO 逻辑处理  订单状态更新
+                $order_sn=$xml->out_trade_no;
+                OrderModel::where('order_sn',$order_sn)->update(['order_status'=>2]);
+                OrderDetailModel::where('order_sn',$order_sn)->update(['detail_status'=>2]);
+
             }
         }
         $response = '<xml><return_code><![CDATA[SUCCESS]]></return_code><return_msg><![CDATA[OK]]></return_msg></xml>';
